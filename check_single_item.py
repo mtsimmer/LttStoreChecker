@@ -1,6 +1,7 @@
 import json
 from item import item
 from requests import request
+from tele_conf import *
 
 intersted_items = {}
 magic_sold_out = r'disabled">Sold Out</button>'
@@ -25,5 +26,13 @@ def is_available(link):
         return False
     return True
 
-if __name__ == '__main__':
+def tele_reply(reply,chat_id):
+    url = GENERIC_TELEGRAM_API + TELEGRAM_BOT_TOKEN + "/sendMessage"
+    data = {"chat_id" : chat_id,
+            "text" : reply}
+    print("=============The message that sent:" + reply) #DEBUG
+    sent = request("POST",url,data=data)
+    print(sent.text) #DEBUG
+
+if_name__ == '__main__':
     main()
